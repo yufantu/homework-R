@@ -1,0 +1,42 @@
+---
+title: "Homework3"
+author: "杜毓凡"
+date: "2017年2月14日"
+output: html_document
+---
+
+# Homework3 of R_programming
+
+```{r message=FALSE, echo=FALSE}
+library("ggplot2")
+```
+
+1. 散佈圖
+```{r}
+ggplot(Puromycin, aes(conc, rate, color=state))+geom_point()+scale_color_manual(values =c("red","purple"))+ggtitle("Reaction Velocity of an Enzymatic Reaction")+xlab("concentration")+ylab("Reaction velocity")+theme(axis.title.y =element_text(angle = 0, vjust=0.5))
+
+```
+
+2. 線圖
+```{r}
+ggplot(Puromycin, aes(conc, rate, color=state))+geom_line()+scale_color_manual(values =c("red","purple"))+ggtitle("Reaction Velocity of an Enzymatic Reaction")+xlab("concentration")+ylab("Reaction velocity")+theme(axis.title.y = element_text(angle = 0, vjust=0.5))
+
+```
+
+3. 直方圖
+```{r}
+ggplot(Puromycin, aes(x=state, fill=state))+geom_histogram(stat="count")+scale_fill_manual(values=c("green","purple"))+ggtitle("number of each state")+xlab("state")+ylab("count")+theme(axis.title.y = element_text(angle = 0, vjust=0.5))+theme(plot.title =element_text(,hjust=0.5) )
+
+```
+
+4. 盒鬚圖
+```{r}
+ggplot(Puromycin, aes(x=state, y=rate))+geom_boxplot(fill=c("red","blue"))+ggtitle("reaction of each state")+xlab("state")+ylab("reaction rate")+theme(axis.title.y = element_text(angle = 0, vjust=0.5))+theme(plot.title =element_text(,hjust=0.5) )
+
+```
+
+5. 長方圖
+```{r}
+ggplot(CO2, aes(x=conc, y=uptake,))+geom_bar(stat="identity",aes(fill=Type))+coord_flip()+facet_wrap(~Treatment)
+
+```
