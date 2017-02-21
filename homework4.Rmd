@@ -78,5 +78,3 @@ my_cal_sd<-function(input){
 example<-c(2,3,5,7,4,24,1,2)
 my_cal_sd(example)
 ```
-
-sd

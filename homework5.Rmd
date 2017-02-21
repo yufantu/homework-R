@@ -1,0 +1,56 @@
+---
+title: "homework5"
+author: "杜毓凡"
+date: "2017年2月21日"
+output: html_document
+---
+```{r echo=FALSE}
+library(magrittr)
+load(url("https://storage.googleapis.com/r_rookies/straw_hat_df.RData"))
+```
+```{r echo=FALSE}
+print(straw_hat_df)
+```
+
+
+#使用 %>% 簡化這段程式
+###簡化前
+load(url("https://storage.googleapis.com/r_rookies/straw_hat_df.RData"))  
+this_year <- as.numeric(format(Sys.Date(), '%Y'))  
+birth_year <- this_year - straw_hat_df$age  
+birth_date_chr <- paste(birth_year, straw_hat_df$birthday, sep = "-")  
+straw_hat_df$birth_date <- as.Date(birth_date_chr)  
+
+###簡化後
+```{r}
+straw_hat_df$birth_date<- Sys.Date() %>%
+  format("%Y") %>%
+  as.numeric() %>%
+  "-"(straw_hat_df$age) %>%
+  paste(. ,straw_hat_df$birthday, sep ="-" ) %>%
+  as.Date()
+```
+```{r echo=FALSE}
+print(straw_hat_df)
+```
+
+#計算 BMI 將 bmi 變數加入 data frame
+```{r}
+heights <- c(173, 168, 171, 189, 179)  
+weights <- c(65.4, 59.2, 63.6, 88.4, 68.7)  
+heights_and_weights <- data.frame(heights, weights)  
+```
+```{r echo=FALSE}
+print(heights_and_weights)
+```
+```{r}
+heights <- c(173, 168, 171, 189, 179)
+weights <- c(65.4, 59.2, 63.6, 88.4, 68.7)
+heights_and_weights <- data.frame(heights, weights)
+
+BMI<-weights/((heights/100)^2) 
+heights_and_weights<- cbind(heights_and_weights, BMI)
+```
+```{r echo=FALSE}
+print(heights_and_weights)
+```
