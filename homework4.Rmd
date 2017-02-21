@@ -1,0 +1,82 @@
+---
+title: "homework4"
+author: "杜毓凡"
+date: "2017年2月21日"
+output: html_document
+---
+
+#將課堂中的自訂排序函數加入 decreasing = 的參數（預設為 FALSE）讓使用者可以指定遞增或遞減排序
+
+```{r}
+exchange.sort.asc <- function(input_vector, decrease = FALSE) {
+    
+  if(decrease == FALSE){
+  for (i in 1:(length(input_vector) - 1)) {
+    for (j in (i + 1):length(input_vector)) {
+      if (input_vector[i] > input_vector[j]) {
+        temp <- input_vector[i]
+        input_vector[i] <- input_vector[j]
+        input_vector[j] <- temp
+      }
+    }
+  }
+    return(input_vector)
+  } else if (decrease == TRUE) {
+      for(i in 1:(length(input_vector)-1)){
+                         for(j in (i+1):length(input_vector)){
+                           if (input_vector[i]<input_vector[j]){
+                             temp <- input_vector[i]
+                             input_vector[i] <- input_vector[j]
+                             input_vector[j] <- temp
+}
+}
+}
+    return(input_vector)
+    }
+}
+
+example<-c(2,3,5,7,4,24,1,2)
+exchange.sort.asc(example)
+exchange.sort.asc(example, decrease=TRUE)
+
+``` 
+#自訂計算樣本標準差的函數
+
+##method(1) by using built-in function
+```{r}
+cal_sd<-function(input){ 
+
+  input<- sqrt((sum((input-mean(input))^2))/(length(input)-1))
+  
+  return(input)
+  
+}
+example<-c(2,3,5,7,4,24,1,2)
+cal_sd(example)
+```
+##method(2) without built-in function
+
+```{r}
+my_cal_sd<-function(input){
+  my_sum_mean<-0
+  count<-0
+  for(i in input){
+    my_sum_mean<-my_sum_mean+i
+    count<-count+1
+    my_mean<-my_sum_mean/count
+  }
+  {my_sum<-0
+    for(i in input){
+      temp<-((i-my_mean)^2)
+      my_sum<-my_sum+temp
+    }
+  }
+  
+ return((my_sum/(count-1))^(0.5))
+}
+
+example<-c(2,3,5,7,4,24,1,2)
+my_cal_sd(example)
+```
+
+sd
